@@ -1,0 +1,219 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ---------------------------------------------------------------
+   "Midnight Skyline" palette — raw brand values
+   --------------------------------------------------------------- */
+:root {
+  --brand-night: #0b1426;        /* dark section background */
+  --brand-night-card: #121d36;   /* card on dark */
+  --brand-mist: #f4f7fb;         /* light section background / text on dark */
+  --brand-teal: #19d3c5;         /* accent on dark */
+  --brand-teal-deep: #0b7a72;    /* accent on light (AA on #F4F7FB) */
+  --brand-amber: #ffb347;        /* MAIN CTAs ONLY — always dark text */
+  --brand-muted: #a9b4c8;        /* muted text on dark */
+  --brand-muted-light: #4a5670;  /* muted text on light (derived, AA) */
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-heading: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  /* Fluid type scale (360px → 1280px) */
+  --text-xs: clamp(0.75rem, 0.73rem + 0.1vw, 0.8125rem);
+  --text-sm: clamp(0.875rem, 0.85rem + 0.11vw, 0.9375rem);
+  --text-base: clamp(1rem, 0.97rem + 0.13vw, 1.0625rem);
+  --text-lg: clamp(1.125rem, 1.07rem + 0.24vw, 1.25rem);
+  --text-xl: clamp(1.25rem, 1.15rem + 0.43vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.33rem + 0.73vw, 1.9375rem);
+  --text-3xl: clamp(1.875rem, 1.6rem + 1.2vw, 2.625rem);
+  --text-4xl: clamp(2.25rem, 1.83rem + 1.83vw, 3.5rem);
+  --text-5xl: clamp(2.625rem, 2rem + 2.7vw, 4.5rem);
+
+  --color-brand-night: var(--brand-night);
+  --color-brand-night-card: var(--brand-night-card);
+  --color-brand-mist: var(--brand-mist);
+  --color-brand-teal: var(--brand-teal);
+  --color-brand-teal-deep: var(--brand-teal-deep);
+  --color-brand-amber: var(--brand-amber);
+  --color-brand-muted: var(--brand-muted);
+  --color-brand-muted-light: var(--brand-muted-light);
+
+  --color-cta: var(--cta);
+  --color-cta-foreground: var(--cta-foreground);
+  --color-accent-strong: var(--accent-strong);
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+
+  /* Big, rounded corners */
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-3xl: calc(var(--radius) * 3);
+  --radius-4xl: calc(var(--radius) * 4);
+
+  /* Soft shadows */
+  --shadow-soft: 0 1px 2px rgb(11 20 38 / 0.06), 0 8px 24px -8px rgb(11 20 38 / 0.16);
+  --shadow-soft-lg: 0 2px 4px rgb(11 20 38 / 0.06), 0 24px 48px -16px rgb(11 20 38 / 0.28);
+}
+
+/* ---------------------------------------------------------------
+   Semantic surfaces. Default page = dark. Wrap any section in
+   .surface-light or .surface-dark to alternate; shadcn tokens follow.
+   --------------------------------------------------------------- */
+:root,
+.surface-dark {
+  color-scheme: dark;
+  --background: var(--brand-night);
+  --foreground: var(--brand-mist);
+  --card: var(--brand-night-card);
+  --card-foreground: var(--brand-mist);
+  --popover: var(--brand-night-card);
+  --popover-foreground: var(--brand-mist);
+  --primary: var(--brand-teal);
+  --primary-foreground: var(--brand-night);
+  --secondary: var(--brand-night-card);
+  --secondary-foreground: var(--brand-mist);
+  --muted: var(--brand-night-card);
+  --muted-foreground: var(--brand-muted);
+  --accent: rgb(25 211 197 / 0.12);
+  --accent-foreground: var(--brand-mist);
+  --accent-strong: var(--brand-teal);
+  --destructive: #ff8a80;
+  --border: rgb(169 180 200 / 0.18);
+  --input: rgb(169 180 200 / 0.28);
+  --ring: var(--brand-teal);
+  --cta: var(--brand-amber);
+  --cta-foreground: var(--brand-night);
+  --radius: 1rem;
+}
+
+.surface-light {
+  color-scheme: light;
+  --background: var(--brand-mist);
+  --foreground: var(--brand-night);
+  --card: #ffffff;
+  --card-foreground: var(--brand-night);
+  --popover: #ffffff;
+  --popover-foreground: var(--brand-night);
+  --primary: var(--brand-teal-deep);
+  --primary-foreground: var(--brand-mist);
+  --secondary: #e6ecf4;
+  --secondary-foreground: var(--brand-night);
+  --muted: #e6ecf4;
+  --muted-foreground: var(--brand-muted-light);
+  --accent: rgb(11 122 114 / 0.1);
+  --accent-foreground: var(--brand-night);
+  --accent-strong: var(--brand-teal-deep);
+  --destructive: #b3261e;
+  --border: rgb(11 20 38 / 0.12);
+  --input: rgb(11 20 38 / 0.2);
+  --ring: var(--brand-teal-deep);
+  --cta: var(--brand-amber);
+  --cta-foreground: var(--brand-night);
+}
+
+.surface-dark,
+.surface-light {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground font-sans text-base leading-relaxed;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading text-balance;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  /* Visible focus ring everywhere, colored per surface */
+  :focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Hero skyline: idle drift (transform) and window twinkle (opacity) */
+@keyframes skyline-drift {
+  from {
+    transform: translate3d(-1.5%, 0, 0);
+  }
+  to {
+    transform: translate3d(1.5%, 0, 0);
+  }
+}
+
+@keyframes window-twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.skyline-drift {
+  animation: skyline-drift var(--drift-duration, 40s) ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.window-twinkle {
+  animation: window-twinkle 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skyline-drift,
+  .window-twinkle {
+    animation: none !important;
+  }
+}
